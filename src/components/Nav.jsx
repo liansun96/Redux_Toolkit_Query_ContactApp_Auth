@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../images/contact-Logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { BiLogOut, BiLogOutCircle } from "react-icons/bi";
+import {RiLogoutCircleRLine} from 'react-icons/ri'
 import { useLogoutMutation } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -29,20 +30,20 @@ const Nav = () => {
   }
 
   return (
-    <div className="w-[1200px] mx-auto my-4 flex justify-between">
+    <div className="w-[1200px] mx-auto my-4 flex justify-between rounded-lg p-3 py-1  custom-shadow-sm">
       <div className="flex justify-between items-center space-x-3">
         <img src={Logo} width={50} alt="" />
-        <h3 className="text-2xl text-gray-500 font-medium">Contacts</h3>
+        <h3 className="text-2xl text-gray-300 font-medium">Contacts</h3>
       </div>
-      <div className="w-60 flex justify-between items-center space-x-6 relative">
+      <div className="w-72 flex justify-between items-center space-x-6 relative">
         <div className="">
           <h6 className="text-lg font-semibold">{user?.name}</h6>
           <p>{user?.email}</p>
         </div>
-        <div className="group absolute left-28">
-          <button onClick={handleLogout} className=" w-10 h-10 duration-200  group-hover:w-32 group-hover:rounded-3xl flex justify-center items-center border-2 border-red-500 group-hover:border-red-500 group-hover:bg-red-500 rounded-full">
+        <div className="group absolute left-32">
+          <button onClick={handleLogout} className=" w-10 h-10 duration-200  group-hover:w-28 group-hover:rounded-3xl flex justify-center items-center border-2 border-red-600 group-hover:border-red-600 group-hover:bg-red-600 rounded-3xl">
             <p className="hidden duration-300 group-hover:block group-hover:me-3 group-hover:text-white">Logout</p>
-            <BiLogOut className="rotate-180 text-xl font-bold text-red-600 scale-95 duration-200 group-hover:scale-105 group-hover:text-white" />
+            <RiLogoutCircleRLine className="text-xl font-bold text-red-600 scale-95 duration-200 group-hover:scale-105 group-hover:text-white" />
           </button>
         </div>
       </div>

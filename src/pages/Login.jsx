@@ -6,11 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../redux/api/authApi";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/services/authSlice";
+import { Dna, FallingLines, RotatingLines, ThreeDots } from "react-loader-spinner";
 
 const Login = () => {
-  const nav = useNavigate()
-  const [login] = useLoginMutation();
-  const dispatch = useDispatch()
+  const nav = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("jay@gmail.com");
   const [password, setPassword] = useState("00009999");
@@ -22,10 +23,10 @@ const Login = () => {
       const user = { email, password };
       const { data } = await login(user);
       console.log(data);
-      dispatch(addUser({user:data?.user,token:data?.token}))
-      if(data.success) nav('/')
+      dispatch(addUser({ user: data?.user, token: data?.token }));
+      if (data.success) nav("/");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -77,10 +78,38 @@ const Login = () => {
               </Link>
               <button
                 type="submit"
-                className="py-2 px-6 text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
+                className="w-[80px] h-[40px] flex justify-center items-center text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
               >
-                Login
+                {isLoading ? (
+                  <ThreeDots 
+                  height="40" 
+                  width="40" 
+                  radius="9"
+                  color="#fafafa" 
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                   />
+                ) : (
+                  <p>Login</p>
+                )}
               </button>
+              {/* {isLoading ? (
+                <FallingLines
+                color="#9173e9"
+                width="40"
+                visible={true}
+                ariaLabel='falling-lines-loading'
+              />
+              ) : (
+                <button
+                  type="submit"
+                  className="py-2 px-6 text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
+                >
+                  Login
+                </button>
+              )} */}
             </div>
           </form>
         </div>
