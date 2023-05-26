@@ -57,20 +57,20 @@ const ContactTable = () => {
                       <div className="flex items-center space-x-5 duration-400 mr-[15px]">
                         <div className="relative group/edit">
                           <MdOutlineStarBorder className="text-xl text-secondary-500" />
-                          <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[110px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
-                            <p>Star contact</p>
+                          <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                            <p className="text-center">Star</p>
                           </span>
                         </div>
                         <div className="relative group/edit">
                           <MdOutlineModeEdit className="text-xl text-secondary-500" />
-                          <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[110px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
-                            <p>Edit contact</p>
+                          <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                            <p className="text-center">Edit</p>
                           </span>
                         </div>
                         <div className="relative group/edit">
                           <MdDeleteOutline className="text-xl text-secondary-500" />
-                          <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[120px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
-                            <p>Delete contact</p>
+                          <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                            <p className="text-center">Delete</p>
                           </span>
                         </div>
                       </div>
