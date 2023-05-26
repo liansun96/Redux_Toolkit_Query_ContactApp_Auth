@@ -30,7 +30,7 @@ const Nav = () => {
   }
 
   return (
-    <div className="w-[1200px] mx-auto my-4 flex justify-between rounded-lg p-3 py-1  custom-shadow-sm">
+    <div className="w-[1200px] mx-auto my-5 flex justify-between rounded-lg p-3 py-2  custom-shadow-lg">
       <div className="flex justify-between items-center space-x-3">
         <img src={Logo} width={50} alt="" />
         <h3 className="text-2xl text-gray-300 font-medium">Contacts</h3>
@@ -40,8 +40,8 @@ const Nav = () => {
           <h6 className="text-lg font-semibold">{user?.name}</h6>
           <p>{user?.email}</p>
         </div>
-        <div className="group absolute left-32">
-          <button onClick={handleLogout} className=" w-10 h-10 duration-200  group-hover:w-28 group-hover:rounded-3xl flex justify-center items-center border-2 border-red-600 group-hover:border-red-600 group-hover:bg-red-600 rounded-3xl">
+        <div className="group absolute left-36">
+          <button onClick={handleLogout} className=" w-10 h-10 duration-300  group-hover:w-28 group-hover:rounded-3xl flex justify-center items-center border-2 border-red-600 group-hover:border-red-600 group-hover:bg-red-600 rounded-3xl">
             <p className="hidden duration-300 group-hover:block group-hover:me-3 group-hover:text-white">Logout</p>
             <RiLogoutCircleRLine className="text-xl font-bold text-red-600 scale-95 duration-200 group-hover:scale-105 group-hover:text-white" />
           </button>

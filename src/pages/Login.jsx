@@ -13,9 +13,10 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("jay@gmail.com");
-  const [password, setPassword] = useState("00009999");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
+ 
 
   const handleLogin = async (e) => {
     try {
@@ -39,7 +40,7 @@ const Login = () => {
             <h4 className="font-semibold text-xl">Login Account</h4>
           </div>
 
-          <form onSubmit={handleLogin} className="mt-4 space-y-8">
+          <form onSubmit={handleLogin} className="mt-4 space-y-8 select-none">
             <div className="group p-3 border border-slate-200 rounded relative">
               <h2 className="absolute -top-6 translate-x-1 translate-y-1/2 bg-white text-sm text-slate-500 px-1">
                 Email
@@ -62,7 +63,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button onClick={() => setShow(!show)}>
+              <button type="reset" onClick={() => setShow(!show)}>
                 {show ? (
                   <BiHide className="absolute cursor-pointer text-xl right-4 top-4 " />
                 ) : (
@@ -70,13 +71,14 @@ const Login = () => {
                 )}
               </button>
             </div>
-            <div className="w-[360px] flex justify-between items-center">
+            <div className="w-[360px] flex justify-between items-center select-none">
               <Link to="/register">
                 <p className="py-2 px-6 text-primary-100 font-semibold p-2 -ml-2 rounded hover:bg-secondary-200 duration-200 hover:text-primary-200 cursor-pointer">
                   Register
                 </p>
               </Link>
               <button
+                disabled={isLoading && true}
                 type="submit"
                 className="w-[80px] h-[40px] flex justify-center items-center text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
               >
@@ -92,7 +94,7 @@ const Login = () => {
                   visible={true}
                    />
                 ) : (
-                  <p>Login</p>
+                  <p className="text-white">Login</p>
                 )}
               </button>
               {/* {isLoading ? (

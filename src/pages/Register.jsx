@@ -64,11 +64,11 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button onClick={() => setShow(!show)}>
+              <button type="reset" onClick={() => setShow(!show)}>
                 {show ? (
-                  <BiShow className="absolute top-4 right-4 text-xl cursor-pointer" />
-                ) : (
                   <BiHide className="absolute top-4 right-4 text-xl cursor-pointer" />
+                ) : (
+                  <BiShow className="absolute top-4 right-4 text-xl cursor-pointer" />
                 )}
               </button>
             </div>
@@ -82,11 +82,11 @@ const Register = () => {
                 value={password_confirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
               />
-              <button onClick={() => setShow1(!show1)}>
+              <button type="reset" onClick={() => setShow1(!show1)}>
                 {show1 ? (
-                  <BiShow className="absolute top-4 right-4 text-xl cursor-pointer" />
-                ) : (
                   <BiHide className="absolute top-4 right-4 text-xl cursor-pointer" />
+                ) : (
+                  <BiShow className="absolute top-4 right-4 text-xl cursor-pointer" />
                 )}
               </button>
             </div>
@@ -97,6 +97,7 @@ const Register = () => {
                 </p>
               </Link>
               <button
+                disabled={isLoading && true}
                 type="submit"
                 className="py-2 px-6 text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
               >
