@@ -7,15 +7,54 @@ export const contactApi = createApi({
   }),
   tagTypes: ["contact"],
   endpoints: (builder) => ({
-    getContact : builder.query({
-        query : (token) => ({
-            url : "/contact",
-            headers : {authorization : `Bearer ${token}` }
-        }),
-        providesTags:['contact']        
-    })
+    getContact: builder.query({
+      query: (token) => ({
+        url: "/contact",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["contact"],
+    }),
+    getSingleContact: builder.query({
+      query: ({ id, token }) => ({
+        url: `contact/${id}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["contact"],
+    }),
+    createContact: builder.mutation({
+      query: ({ token, contact }) => ({
+        url: "/contact",
+        method: "POST",
+        body: contact,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["contact"],
+    }),
+    updateContact: builder.mutation({
+      query: ({token , newContact})=>({
+        url : `/contact/${newContact.id}`,
+        method : 'PUT',
+        body : newContact,
+        headers : { authorization : `Bearer ${token}`},
+      }),
+      invalidatesTags:['contact']
+    }),
+    deleteContact: builder.mutation({
+      query: ({ id,token }) => ({
+        url: `/contact/${id}`,
+        method: "DELETE",
+        body: id,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["contact"],
+    }),
   }),
 });
 
-export const { useGetContactQuery } =
-  contactApi;
+export const {
+  useGetContactQuery,
+  useGetSingleContactQuery,
+  useCreateContactMutation,
+  useUpdateContactMutation,
+  useDeleteContactMutation,
+} = contactApi;

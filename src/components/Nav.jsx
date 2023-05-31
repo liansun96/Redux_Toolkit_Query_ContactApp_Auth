@@ -17,8 +17,8 @@ const Nav = () => {
 
 //   const { user } = useSelector((state) => state.authSlice);
 //   const { token } = useSelector((state) => state.authSlice);
-  console.log(user);
-  console.log(token);
+  // console.log(user);
+  // console.log(token);
   const [logout] = useLogoutMutation();
   const nav = useNavigate()
 

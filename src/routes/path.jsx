@@ -5,6 +5,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Nav from "../components/Nav";
 import Guard from "../components/Guard";
+import CreateContact from "../components/CreateContact";
+import EditContact from "../components/EditContact";
+import SingleContactInfo from "../components/SingleContactInfo";
 
 const path = () => {
   return (
@@ -12,6 +15,9 @@ const path = () => {
       <Route path="/" element={<Guard><Dashboard /></Guard>} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/createContact" element={<CreateContact />} />
+      <Route path="/editContact/:id" element={<EditContact />} />
+      <Route path="/singleContactInfo/:id" element={<SingleContactInfo/>} />
     </Routes>
   );
 };
