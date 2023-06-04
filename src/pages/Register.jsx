@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Logo from "../images/contact-Logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { useRegisterMutation } from "../redux/api/authApi";
+import { ThreeDots } from "react-loader-spinner";
 
 const Register = () => {
-  const [register , error] = useRegisterMutation();
+  const [register, { isLoading, isError, error }] = useRegisterMutation();
+  const nav = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,8 +19,9 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const user = { name, email, password, password_confirmation };
-    const data = await register(user);
-    console.log(data , error);
+    const {data} = await register(user);
+    console.log(data, isError);
+    if (data?.success) nav("/login");    
   };
 
   return (
@@ -99,9 +102,22 @@ const Register = () => {
               <button
                 disabled={isLoading && true}
                 type="submit"
-                className="py-2 px-6 text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
+                className="w-[80px] h-[40px] flex justify-center items-center text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
               >
-                Register
+                {isLoading ? (
+                  <ThreeDots 
+                  height="40" 
+                  width="40" 
+                  radius="9"
+                  color="#fafafa" 
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                   />
+                ) : (
+                  <p className="text-white">Register</p>
+                )}
               </button>
             </div>
           </form>

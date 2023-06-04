@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../images/contact-Logo.svg";
-import { TbCameraPlus ,TbCurrentLocation ,TbAddressBook } from "react-icons/tb";
+import { TbCameraPlus, TbCurrentLocation, TbAddressBook } from "react-icons/tb";
 import { HiOutlineUser, HiOutlineMail } from "react-icons/hi";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { MdOutlinePhone } from "react-icons/md";
@@ -9,23 +9,23 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const CreateContact = () => {
-
-    const token = Cookies.get("token")
-    const [createContact , {isLoading,isError , error}] = useCreateContactMutation(token)
-    const nav = useNavigate()
+  const token = Cookies.get("token");
+  const [createContact, { isLoading, isError, error }] =
+    useCreateContactMutation(token);
+  const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  const handleCreate = async(e) => {
-    e.preventDefault()
-    const contact ={name,email,phone,address}
-    const {data} = await createContact({token,contact})
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    const contact = { name, email, phone, address };
+    const { data } = await createContact({ token, contact });
     console.log(data);
-    if(data?.success) nav('/')
-    console.log(isError)
-  }
+    if (data?.success) nav("/");
+    console.log(isError);
+  };
 
   return (
     <div>
@@ -60,7 +60,7 @@ const CreateContact = () => {
                   type="number"
                   placeholder="Phone"
                   value={phone}
-                  onChange={(e)=>setPhone(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="border-b-[1px] border-secondary-200 outline-none py-2 "
                 />
               </div>
@@ -74,7 +74,7 @@ const CreateContact = () => {
                   type="text"
                   placeholder="Email"
                   value={email}
-                  onChange={(e)=> setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="border-b-[1px] border-secondary-200 outline-none py-2 "
                 />
               </div>

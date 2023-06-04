@@ -2,32 +2,32 @@ import React from "react";
 import Logo from "../images/contact-Logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { BiLogOut, BiLogOutCircle } from "react-icons/bi";
-import {RiLogoutCircleRLine} from 'react-icons/ri'
+import { RiLogoutCircleRLine, RiSettings5Line } from "react-icons/ri";
 import { useLogoutMutation } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { removeUser } from "../redux/services/authSlice";
+import {Link} from 'react-router-dom'
 
 const Nav = () => {
+  const user = JSON.parse(Cookies.get("user"));
+  const token = Cookies.get("token");
 
-    const user = JSON.parse(Cookies.get("user"))
-    const token = Cookies.get("token")
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-
-//   const { user } = useSelector((state) => state.authSlice);
-//   const { token } = useSelector((state) => state.authSlice);
+  //   const { user } = useSelector((state) => state.authSlice);
+  //   const { token } = useSelector((state) => state.authSlice);
   // console.log(user);
   // console.log(token);
   const [logout] = useLogoutMutation();
-  const nav = useNavigate()
+  const nav = useNavigate();
 
-  const handleLogout = async()=>{
-    const {data} = await logout(token);
+  const handleLogout = async () => {
+    const { data } = await logout(token);
     dispatch(removeUser());
-    if(data?.success) nav('/login')
-    console.log(data)
-  }
+    if (data?.success) nav("/login");
+    console.log(data);
+  };
 
   return (
     <div className="w-[1200px] mx-auto my-5 flex justify-between rounded-lg p-3 py-2  custom-shadow-lg">
@@ -41,12 +41,26 @@ const Nav = () => {
           <p>{user?.email}</p>
         </div>
         <div className="group absolute left-36">
-          <button onClick={handleLogout} className=" w-10 h-10 duration-300  group-hover:w-28 group-hover:rounded-3xl flex justify-center items-center border-2 border-red-600 group-hover:border-red-600 group-hover:bg-red-600 rounded-3xl">
-            <p className="hidden duration-300 group-hover:block group-hover:me-3 group-hover:text-white">Logout</p>
+          <button
+            onClick={handleLogout}
+            className=" w-10 h-10 duration-300  group-hover:w-28 group-hover:rounded-3xl flex justify-center items-center border-2 border-red-600 group-hover:border-red-600 group-hover:bg-red-600 rounded-3xl"
+          >
+            <p className="hidden duration-300 group-hover:block group-hover:me-3 group-hover:text-white">
+              Logout
+            </p>
             <RiLogoutCircleRLine className="text-xl font-bold text-red-600 scale-95 duration-200 group-hover:scale-105 group-hover:text-white" />
           </button>
         </div>
       </div>
+      <Link to={'/changepassword'}>
+        {/* <button className="px-3 py-1  bg-black text-white">Password</button> */}
+        <div className="relative group mt-3">
+              <RiSettings5Line className="text-secondary-500 text-2xl" />
+              <span className="hidden group-hover:block absolute top-7 -left-12 w-[150px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                <p>Change Password </p>
+              </span>
+            </div>
+      </Link>
     </div>
   );
 };

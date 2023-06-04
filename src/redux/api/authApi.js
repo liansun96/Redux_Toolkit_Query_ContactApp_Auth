@@ -27,12 +27,25 @@ export const authApi = createApi({
       query: (token) => ({
         url: "/user-logout",
         method: "POST",
-        headers: { authorization : `Bearer ${token} ` },
+        headers: { authorization: `Bearer ${token} ` },
+      }),
+      invalidatesTags: ["auth"],
+    }),
+    updatePassword: builder.mutation({
+      query: ({ token ,changedPassword}) => ({
+        url: "/change-password",
+        method: "POST",
+        body: changedPassword,
+        headers: { authorization: `Bearer ${token}` },
       }),
       invalidatesTags: ["auth"],
     }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation } =
-  authApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useUpdatePasswordMutation
+} = authApi;

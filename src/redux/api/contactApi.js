@@ -33,7 +33,7 @@ export const contactApi = createApi({
     updateContact: builder.mutation({
       query: ({token , newContact})=>({
         url : `/contact/${newContact.id}`,
-        method : 'PUT',
+        method : 'PATCH',
         body : newContact,
         headers : { authorization : `Bearer ${token}`},
       }),

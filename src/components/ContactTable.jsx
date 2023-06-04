@@ -32,6 +32,7 @@ const ContactTable = () => {
   const searchContact = useSelector(
     (state) => state.contactSlice.searchContact
   );
+  console.log(contacts);
 
   
   useEffect(() => {
@@ -150,7 +151,7 @@ const ContactTable = () => {
           </thead>
 
           <p className="text-[10px] text-slate-500 font-bold tracking-widest py-2">
-            CONTACTS (10)
+            CONTACTS ()
           </p>
 
           <tbody>{row}</tbody>

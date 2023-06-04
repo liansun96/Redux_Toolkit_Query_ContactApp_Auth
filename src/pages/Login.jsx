@@ -63,7 +63,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="reset" onClick={() => setShow(!show)}>
+              <button className="" type="reset" onClick={() => setShow(!show)}>
                 {show ? (
                   <BiHide className="absolute cursor-pointer text-xl right-4 top-4 " />
                 ) : (
