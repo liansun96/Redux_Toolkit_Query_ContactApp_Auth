@@ -40,7 +40,7 @@ const Register = () => {
               </h2>
               <input
                 type="text"
-                className="focus:outline-none w-[335px] placeholder:one"
+                className="focus:outline-none w-[335px] placeholder:none"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -51,7 +51,7 @@ const Register = () => {
               </h2>
               <input
                 type="text"
-                className="focus:outline-none w-[335px] placeholder:one"
+                className="focus:outline-none w-[335px] placeholder:none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -63,7 +63,7 @@ const Register = () => {
               </h2>
               <input
                 type={show ? "text" : "password"}
-                className="focus:outline-none w-[335px] placeholder:one"
+                className="focus:outline-none w-[335px] placeholder:none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -81,7 +81,7 @@ const Register = () => {
               </h2>
               <input
                 type={show1 ? "text" : "password"}
-                className="focus:outline-none w-[335px] placeholder:one"
+                className="focus:outline-none w-[335px] placeholder:none"
                 value={password_confirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
               />

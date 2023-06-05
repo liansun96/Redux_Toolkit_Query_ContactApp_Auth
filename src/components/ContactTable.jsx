@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdOutlineStarBorder,
   MdOutlineModeEdit,
@@ -6,7 +6,11 @@ import {
   MdInfoOutline,
 } from "react-icons/md";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useDeleteContactMutation, useGetContactQuery } from "../redux/api/contactApi";
+import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
+import {
+  useDeleteContactMutation,
+  useGetContactQuery,
+} from "../redux/api/contactApi";
 import Cookies from "js-cookie";
 import { MutatingDots, RevolvingDot } from "react-loader-spinner";
 import { Link } from "react-router-dom";
@@ -14,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addContacts, setSearchContact } from "../redux/services/contactSlice";
 
 const ContactTable = () => {
+  const [num, setNum] = useState(1);
   const colors = [
     "#845EC2",
     "#D65DB1",
@@ -24,9 +29,9 @@ const ContactTable = () => {
   ];
   const token = Cookies.get("token");
 
-  const { data } = useGetContactQuery(token);
-  const  [deleteContact] = useDeleteContactMutation();
-  // console.log(data);
+  const { data } = useGetContactQuery({ token, num });
+  const [deleteContact] = useDeleteContactMutation();
+  console.log(data);
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contactSlice.contacts);
   const searchContact = useSelector(
@@ -34,10 +39,29 @@ const ContactTable = () => {
   );
   console.log(contacts);
 
-  
   useEffect(() => {
     dispatch(addContacts(data?.contacts?.data));
   }, [data]);
+
+  const nextPage = () => {
+    if (contacts.length) {
+      setNum((prev) => prev + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (contacts.length > 1) {
+      setNum((prev) = perv - 1);
+    }
+  };
+
+  const selectPageHandler = (i) => {
+    setNum(i)
+  }
+
+  const totalPages = data?.contacts?.total
+    ? Math.ceil(data.contacts.total / 10)
+    : 0;
 
   const row = contacts
     ?.filter((item) => {
@@ -94,7 +118,10 @@ const ContactTable = () => {
                     </span>
                   </div>
                 </Link>
-                <button onClick={()=>deleteContact({id:contact?.id,token})} className="relative group/edit">
+                <button
+                  onClick={() => deleteContact({ id: contact?.id, token })}
+                  className="relative group/edit"
+                >
                   <MdDeleteOutline className="text-xl text-secondary-500" />
                   <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                     <p className="text-center">Delete</p>
@@ -151,11 +178,22 @@ const ContactTable = () => {
           </thead>
 
           <p className="text-[10px] text-slate-500 font-bold tracking-widest py-2">
-            CONTACTS ()
+            CONTACTS ({data?.contacts?.total})
           </p>
 
           <tbody>{row}</tbody>
         </table>
+        <div className="w-[50%] mx-auto flex justify-around items-center my-4 mt-auto">
+          <button onClick={() => selectPageHandler(num - 1)} className={num > 1 ? "" : "hidden"} >
+            <CiCircleChevLeft className="text-2xl" />
+          </button>
+          {[...Array(totalPages)].map((_, i) => {
+            return <span className={num === i + 1 ? "bg-primary-100 text-white w-6 h-6 flex justify-center items-center rounded-full" : ""}  onClick={()=>selectPageHandler(i+1)} key={i}>{i + 1}</span>;
+          })}
+          <button onClick={() => selectPageHandler(num + 1)} className={num < totalPages ? "" : "hidden"}>
+            <CiCircleChevRight className="text-2xl" />
+          </button>
+        </div>
       </div>
     </div>
   );

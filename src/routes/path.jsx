@@ -9,6 +9,7 @@ import CreateContact from "../components/CreateContact";
 import EditContact from "../components/EditContact";
 import SingleContactInfo from "../components/SingleContactInfo";
 import ChangePassword from "../components/ChangePassword";
+import Pagination from "../components/pagination";
 
 const path = () => {
   return (
@@ -20,6 +21,7 @@ const path = () => {
       <Route path="/editContact/:id" element={<EditContact />} />
       <Route path="/singleContactInfo/:id" element={<SingleContactInfo/>} />
       <Route path="/changepassword" element={<ChangePassword/>}/>
+      <Route path="/pagination" element={<Pagination/>}/>
     </Routes>
   );
 };
